@@ -47,6 +47,12 @@ class GoogleChart extends Widget
      */
     public $data = array();
 
+	/**
+     * @var boolean $isDataTable the data is already a dataTable and doesn't need to be converted, default is false
+	 * @see https://google-developers.appspot.com/chart/interactive/docs/datatables_dataviews#javascriptliteral
+     */
+    public $isDataTable = false;
+
     /**
      * @var array $options additional configuration options
      * @see https://google-developers.appspot.com/chart/interactive/docs/customizing_charts
@@ -95,12 +101,18 @@ class GoogleChart extends Widget
         $jsData = Json::encode($this->data);
         $jsOptions = Json::encode($this->options);
 
+		if($this->isDataTable){
+			$dataType = 'new google.visualization.DataTable';
+		}else{
+			$dataType = 'google.visualization.arrayToDataTable';
+		}
+		
         $script = '
 			google.setOnLoadCallback(drawChart' . $id . ');
 			var ' . $id . '=null;
 			function drawChart' . $id . '() {
-				var data = google.visualization.arrayToDataTable(' . $jsData . ');
-
+				var data = '.$dataType.'(' . $jsData . ');
+				
 				' . $this->scriptAfterArrayToDataTable . '
 
 				var options = ' . $jsOptions . ';
