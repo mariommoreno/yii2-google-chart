@@ -1,25 +1,30 @@
 Google Chart
 ============
-A wraper for google chart
+A wraper for google chart.
+Forked from https://github.com/ScottHuangZL/yii2-google-chart
+
+Adds support for DataTables in Data
 
 Installation
 ------------
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Either run
+Add
 
 ```
-php composer.phar require scotthuangzl/yii2-google-chart "dev-master"
+ "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mariommoreno/yii2-google-chart"
+        }
+    ],
+  "require": {
+    "scotthuangzl/yii2-google-chart": "dev-extra"
+  }
 ```
 
-or add
-
-```
-"scotthuangzl/yii2-google-chart": "dev-master"
-```
-
-to the require section of your `composer.json` file.
+to your `composer.json` file.
 
 
 Usage
